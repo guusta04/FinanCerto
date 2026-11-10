@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Criar conta — FinanCerto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <!-- Painel de marca -->
+  <aside class="brand-panel">
+    <div class="brand-mark"><span class="dot"></span> FinanCerto</div>
+
+    <div class="brand-copy">
+      <div class="brand-eyebrow">Comece agora</div>
+      <h1>Organize suas finanças em poucos minutos.</h1>
+      <p>Cadastre receitas e despesas, defina metas e acompanhe cartões e faturas — tudo em um painel só.</p>
+
+      <div class="balance-card">
+        <div class="label">Exemplo de meta</div>
+        <div class="value">R$ 5.000,00</div>
+        <span class="trend">↑ 62% alcançado</span>
+
+        <svg class="balance-chart" viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="chartFill2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#146B4B" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#146B4B" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path class="fill" d="M0,80 L30,74 L60,68 L90,70 L120,55 L150,58 L180,40 L210,44 L240,28 L270,30 L300,18 L320,16 L320,90 L0,90 Z" style="fill:url(#chartFill2);" />
+          <path class="line" d="M0,80 L30,74 L60,68 L90,70 L120,55 L150,58 L180,40 L210,44 L240,28 L270,30 L300,18 L320,16" />
+          <circle cx="320" cy="16" r="4" />
+        </svg>
+
+        <div class="stat-row">
+          <span class="stat-chip">Categorias <strong>8</strong></span>
+          <span class="stat-chip">Cartões <strong>2</strong></span>
+          <span class="stat-chip">Alertas <strong>ativos</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-footer">Dados ilustrativos — protótipo de interface do FinanCerto.</div>
+  </aside>
+
+  <!-- Painel de formulário -->
+  <main class="form-panel">
+    <div class="form-wrap">
+      <div class="mobile-brand"><span class="dot"></span> FinanCerto</div>
+
+      <div class="form-header">
+        <h2>Criar sua conta</h2>
+        <p>Leva menos de um minuto para começar a organizar suas finanças.</p>
+      </div>
+
+      <form id="cadastro-form" class="auth-form" novalidate>
+
+        <div class="field">
+          <label for="cad-nome">Nome completo</label>
+          <div class="input-wrap">
+            <input type="text" id="cad-nome" name="nome" placeholder="Como podemos te chamar" autocomplete="name" />
+          </div>
+          <div class="field-error" id="cad-nome-error"></div>
+        </div>
+
+        <div class="field">
+          <label for="cad-email">E-mail</label>
+          <div class="input-wrap">
+            <input type="email" id="cad-email" name="email" placeholder="voce@email.com" autocomplete="email" />
+          </div>
+          <div class="field-error" id="cad-email-error"></div>
+        </div>
+
+        <div class="field">
+          <label for="cad-senha">Senha</label>
+          <div class="input-wrap">
+            <input type="password" id="cad-senha" name="senha" placeholder="Crie uma senha" autocomplete="new-password" />
+            <button type="button" class="toggle-visibility" data-target="cad-senha" aria-pressed="false">Mostrar</button>
+          </div>
+          <div class="strength" id="cad-strength" aria-hidden="true">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+          </div>
+          <div class="strength-label" id="cad-strength-label"></div>
+          <div class="field-error" id="cad-senha-error"></div>
+        </div>
+
+        <div class="field">
+          <label for="cad-confirmar">Confirmar senha</label>
+          <div class="input-wrap">
+            <input type="password" id="cad-confirmar" name="confirmar" placeholder="Repita a senha" autocomplete="new-password" />
+            <button type="button" class="toggle-visibility" data-target="cad-confirmar" aria-pressed="false">Mostrar</button>
+          </div>
+          <div class="field-error" id="cad-confirmar-error"></div>
+        </div>
+
+        <div>
+          <label class="checkbox-line">
+            <input type="checkbox" id="cad-termos" />
+            Li e aceito os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a>.
+          </label>
+          <div class="field-error" id="cad-termos-error"></div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="cadastro-submit">Criar conta</button>
+
+        <div class="form-toast" id="cadastro-toast" role="status"></div>
+      </form>
+
+      <div class="form-footer">
+        Já tem uma conta? <a href="index.html">Entrar</a>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

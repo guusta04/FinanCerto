@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meu Perfil — FinanCerto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/extra.css" />
+</head>
+<body>
+
+<div class="dash-shell">
+  <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Fechar menu">✕</button>
+    <div class="brand-mark"><span class="dot"></span> FinanCerto</div>
+    <nav>
+      <a class="nav-link" href="dashboard.html"><span class="ico">◧</span> Dashboard</a>
+      <a class="nav-link" href="receitas-despesas.html"><span class="ico">↕</span> Receitas &amp; Despesas</a>
+      <a class="nav-link" href="metas.html"><span class="ico">◎</span> Metas</a>
+      <a class="nav-link" href="cartoes.html"><span class="ico">▤</span> Cartões &amp; Faturas</a>
+      <a class="nav-link" href="relatorios.html"><span class="ico">▦</span> Relatórios</a>
+      <a class="nav-link" href="alertas.html"><span class="ico">!</span> Alertas</a>
+      <a class="nav-link" href="configuracoes.html"><span class="ico">⚙</span> Configurações</a>
+    </nav>
+    <a class="sidebar-footer" id="sidebar-profile-link" href="perfil.html" style="text-decoration:none;">
+      <div class="avatar" id="sidebar-avatar">?</div>
+      <div class="who">
+        <strong id="sidebar-nome">Meu perfil</strong>
+        <span id="sidebar-email">Editar dados</span>
+      </div>
+    </a>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div style="display:flex; align-items:center;">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+        <div class="topbar-title">
+          <div>
+            <h1>Meu perfil</h1>
+            <p>Atualize suas informações pessoais.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-layout">
+      <div class="panel profile-card">
+        <div class="profile-avatar-lg" id="profile-avatar-lg">?</div>
+        <h3 id="profile-preview-nome">—</h3>
+        <p id="profile-preview-email">—</p>
+      </div>
+
+      <div>
+        <div class="panel">
+          <div class="panel-header"><h2>Dados pessoais</h2></div>
+          <form id="profile-form" class="profile-form-grid" novalidate>
+            <div class="field">
+              <label for="p-nome">Nome completo</label>
+              <div class="input-wrap">
+                <input type="text" id="p-nome" placeholder="Seu nome" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="p-email">E-mail</label>
+              <div class="input-wrap">
+                <input type="email" id="p-email" placeholder="voce@email.com" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="p-telefone">Telefone <span style="font-weight:400; color:var(--ink-faint);">(opcional)</span></label>
+              <div class="input-wrap">
+                <input type="tel" id="p-telefone" placeholder="(00) 00000-0000" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="p-moeda">Moeda</label>
+              <select id="p-moeda" class="select-input" disabled>
+                <option>Real brasileiro (R$)</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="p-bio">Sobre <span style="font-weight:400; color:var(--ink-faint);">(opcional)</span></label>
+              <textarea id="p-bio" placeholder="Uma frase sobre seus objetivos financeiros..."></textarea>
+            </div>
+
+            <div class="form-actions-row" style="grid-column:1/-1;">
+              <button type="submit" class="btn-primary" style="flex:none;">Salvar alterações</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel" style="margin-top:16px;">
+          <div class="panel-header"><h2>Alterar senha</h2></div>
+          <form id="password-form" class="profile-form-grid" novalidate>
+            <div class="field">
+              <label for="p-senha-nova">Nova senha</label>
+              <div class="input-wrap">
+                <input type="password" id="p-senha-nova" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+              </div>
+              <div class="field-error" id="p-senha-nova-error"></div>
+            </div>
+            <div class="field">
+              <label for="p-senha-confirmar">Confirmar nova senha</label>
+              <div class="input-wrap">
+                <input type="password" id="p-senha-confirmar" placeholder="Repita a senha" autocomplete="new-password" />
+              </div>
+              <div class="field-error" id="p-senha-confirmar-error"></div>
+            </div>
+            <div class="form-actions-row" style="grid-column:1/-1;">
+              <button type="submit" class="btn-primary" style="flex:none;">Atualizar senha</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="snackbar" id="snackbar">
+  <span id="snackbar-text"></span>
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/perfil-sync.js"></script>
+<script src="js/perfil.js"></script>
+</body>
+</html>

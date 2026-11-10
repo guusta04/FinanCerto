@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar — FinanCerto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <div class="auth-shell">
+
+    <!-- Painel de marca -->
+    <aside class="brand-panel">
+      <div class="brand-mark"><span class="dot"></span> FinanCerto</div>
+
+      <div class="brand-copy">
+        <div class="brand-eyebrow">Controle financeiro pessoal</div>
+        <h1>Sua vida financeira, organizada em um único lugar.</h1>
+        <p>Acompanhe receitas, despesas, metas e cartões com clareza — e veja seu saldo evoluir mês a mês.</p>
+
+        <div class="balance-card">
+          <div class="label">Saldo atual</div>
+          <div class="value">R$ 12.480,32</div>
+          <span class="trend">↑ 18,4% este mês</span>
+
+          <svg class="balance-chart" viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#146B4B" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#146B4B" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path class="fill"
+              d="M0,70 L20,66 L50,58 L80,62 L110,45 L140,50 L170,32 L200,38 L230,20 L260,26 L290,10 L320,14 L320,90 L0,90 Z" />
+            <path class="line"
+              d="M0,70 L20,66 L50,58 L80,62 L110,45 L140,50 L170,32 L200,38 L230,20 L260,26 L290,10 L320,14" />
+            <circle cx="320" cy="14" r="4" />
+          </svg>
+
+          <div class="stat-row">
+            <span class="stat-chip">Receitas <strong>R$ 8.200</strong></span>
+            <span class="stat-chip">Despesas <strong>R$ 3.150</strong></span>
+            <span class="stat-chip">Metas <strong>62%</strong></span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Painel de formulário -->
+    <main class="form-panel">
+      <div class="form-wrap">
+        <div class="mobile-brand"><span class="dot"></span> FinanCerto</div>
+
+        <div class="form-header">
+          <h2>Bem-vindo de volta</h2>
+          <p>Entre com sua conta para ver seu painel financeiro.</p>
+        </div>
+
+        <form id="login-form" class="auth-form" novalidate>
+
+          <div class="field">
+            <label for="login-email">E-mail</label>
+            <div class="input-wrap">
+              <input type="email" id="login-email" name="email" placeholder="voce@email.com" autocomplete="email" />
+            </div>
+            <div class="field-error" id="login-email-error"></div>
+          </div>
+
+          <div class="field">
+            <label for="login-senha">Senha</label>
+            <div class="input-wrap">
+              <input type="password" id="login-senha" name="senha" placeholder="Sua senha"
+                autocomplete="current-password" />
+              <button type="button" class="toggle-visibility" data-target="login-senha"
+                aria-pressed="false">Mostrar</button>
+            </div>
+            <div class="field-error" id="login-senha-error"></div>
+          </div>
+
+          <div class="row-between">
+            <label class="checkbox-line" style="font-size:0.86rem;">
+              <input type="checkbox" id="login-lembrar" />
+              Lembrar-me
+            </label>
+            <a href="#" class="link-quiet">Esqueci minha senha</a>
+          </div>
+
+          <button type="submit" class="btn-primary" id="login-submit" disabled>Entrar</button>
+
+          <div class="form-toast" id="login-toast" role="status"></div>
+        </form>
+
+        <div class="divider">ou</div>
+
+        <div class="form-footer">
+          Ainda não tem conta? <a href="cadastro.html">Criar conta</a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+<script src="js/api.js"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>

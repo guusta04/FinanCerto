@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Metas — FinanCerto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/extra.css" />
+</head>
+<body>
+
+<div class="dash-shell">
+  <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Fechar menu">✕</button>
+    <div class="brand-mark"><span class="dot"></span> FinanCerto</div>
+    <nav>
+      <a class="nav-link" href="dashboard.html"><span class="ico">◧</span> Dashboard</a>
+      <a class="nav-link" href="receitas-despesas.html"><span class="ico">↕</span> Receitas &amp; Despesas</a>
+      <a class="nav-link active" href="metas.html"><span class="ico">◎</span> Metas</a>
+      <a class="nav-link" href="cartoes.html"><span class="ico">▤</span> Cartões &amp; Faturas</a>
+      <a class="nav-link" href="relatorios.html"><span class="ico">▦</span> Relatórios</a>
+      <a class="nav-link" href="alertas.html"><span class="ico">!</span> Alertas</a>
+      <a class="nav-link" href="configuracoes.html"><span class="ico">⚙</span> Configurações</a>
+    </nav>
+    <a class="sidebar-footer" id="sidebar-profile-link" href="perfil.html" style="text-decoration:none;">
+      <div class="avatar" id="sidebar-avatar">?</div>
+      <div class="who">
+        <strong id="sidebar-nome">Meu perfil</strong>
+        <span id="sidebar-email">Editar dados</span>
+      </div>
+    </a>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div style="display:flex; align-items:center;">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+        <div class="topbar-title">
+          <div>
+            <h1>Metas</h1>
+            <p>Acompanhe seus objetivos financeiros.</p>
+          </div>
+        </div>
+      </div>
+      <div class="btn-icon-row">
+        <button class="btn-primary" id="open-modal">+ Nova meta</button>
+      </div>
+    </div>
+
+    <div class="card-grid" id="goal-grid"></div>
+  </main>
+</div>
+
+<!-- Modal: nova / editar meta -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="form-header">
+      <h2 id="modal-title">Nova meta</h2>
+      <p>Defina um objetivo para acompanhar o progresso ao longo do tempo.</p>
+    </div>
+    <form id="meta-form" class="auth-form" novalidate>
+      <input type="hidden" id="meta-id" value="" />
+      <div class="field">
+        <label for="meta-nome">Nome da meta</label>
+        <div class="input-wrap">
+          <input type="text" id="meta-nome" placeholder="Ex: Viagem para o Nordeste" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="meta-atual">Valor já guardado (R$)</label>
+        <div class="input-wrap">
+          <input type="number" id="meta-atual" step="0.01" min="0" placeholder="0,00" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="meta-alvo">Valor da meta (R$)</label>
+        <div class="input-wrap">
+          <input type="number" id="meta-alvo" step="0.01" min="0.01" placeholder="0,00" required />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" id="cancel-modal">Cancelar</button>
+        <button type="submit" class="btn-primary" id="meta-submit">Salvar meta</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: confirmar exclusão -->
+<div class="modal-overlay" id="confirm-delete-overlay">
+  <div class="modal-box confirm-box">
+    <div class="confirm-icon">🗑</div>
+    <h2>Excluir meta?</h2>
+    <p id="confirm-delete-text"></p>
+    <div class="modal-actions" style="margin-top:18px;">
+      <button type="button" class="btn-ghost" id="cancel-delete">Cancelar</button>
+      <button type="button" class="btn-danger" id="confirm-delete">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="snackbar" id="snackbar">
+  <span id="snackbar-text"></span>
+  <button class="snackbar-undo" id="snackbar-undo" type="button">Desfazer</button>
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/perfil-sync.js"></script>
+<script src="js/metas.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cartões &amp; Faturas — FinanCerto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/extra.css" />
+</head>
+<body>
+
+<div class="dash-shell">
+  <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Fechar menu">✕</button>
+    <div class="brand-mark"><span class="dot"></span> FinanCerto</div>
+    <nav>
+      <a class="nav-link" href="dashboard.html"><span class="ico">◧</span> Dashboard</a>
+      <a class="nav-link" href="receitas-despesas.html"><span class="ico">↕</span> Receitas &amp; Despesas</a>
+      <a class="nav-link" href="metas.html"><span class="ico">◎</span> Metas</a>
+      <a class="nav-link active" href="cartoes.html"><span class="ico">▤</span> Cartões &amp; Faturas</a>
+      <a class="nav-link" href="relatorios.html"><span class="ico">▦</span> Relatórios</a>
+      <a class="nav-link" href="alertas.html"><span class="ico">!</span> Alertas</a>
+      <a class="nav-link" href="configuracoes.html"><span class="ico">⚙</span> Configurações</a>
+    </nav>
+    <a class="sidebar-footer" id="sidebar-profile-link" href="perfil.html" style="text-decoration:none;">
+      <div class="avatar" id="sidebar-avatar">?</div>
+      <div class="who">
+        <strong id="sidebar-nome">Meu perfil</strong>
+        <span id="sidebar-email">Editar dados</span>
+      </div>
+    </a>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div style="display:flex; align-items:center;">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+        <div class="topbar-title">
+          <div>
+            <h1>Cartões &amp; Faturas</h1>
+            <p>Gerencie seus cartões e acompanhe as faturas.</p>
+          </div>
+        </div>
+      </div>
+      <div class="btn-icon-row">
+        <button class="btn-primary" id="open-card-modal">+ Novo cartão</button>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-block-header">
+        <h2>Seus cartões</h2>
+        <span class="sub" id="card-count"></span>
+      </div>
+      <div class="card-grid" id="card-grid"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-block-header">
+        <h2>Faturas</h2>
+        <span class="sub" id="fatura-count"></span>
+      </div>
+      <div class="panel">
+        <table class="tx-table">
+          <thead>
+            <tr>
+              <th>Cartão</th>
+              <th>Mês de referência</th>
+              <th>Vencimento</th>
+              <th>Status</th>
+              <th style="text-align:right;">Valor</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="fatura-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-block-header">
+        <h2>Compras no cartão</h2>
+        <button class="btn-ghost" id="open-compra-modal">+ Nova compra</button>
+      </div>
+      <div class="panel">
+        <table class="tx-table">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Cartão</th>
+              <th>Data</th>
+              <th>Parcelas</th>
+              <th style="text-align:right;">Valor</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="compra-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: novo cartão -->
+<div class="modal-overlay" id="card-modal-overlay">
+  <div class="modal-box">
+    <div class="form-header">
+      <h2>Novo cartão</h2>
+      <p>Cadastre um cartão para registrar compras e acompanhar as faturas.</p>
+    </div>
+    <form id="card-form" class="auth-form" novalidate>
+      <div class="field">
+        <label for="card-nome">Nome do cartão</label>
+        <div class="input-wrap">
+          <input type="text" id="card-nome" placeholder="Ex: Nubank Roxinho" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="card-bandeira">Bandeira</label>
+        <select id="card-bandeira" class="select-input">
+          <option value="VISA">Visa</option>
+          <option value="MASTERCARD">Mastercard</option>
+          <option value="ELO">Elo</option>
+          <option value="AMEX">American Express</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="card-numero">Número do cartão (16 dígitos)</label>
+        <div class="input-wrap">
+          <input type="text" id="card-numero" maxlength="19" placeholder="0000 0000 0000 0000" inputmode="numeric" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="card-validade">Validade</label>
+        <div class="input-wrap">
+          <input type="month" id="card-validade" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="card-vencimento">Dia de vencimento da fatura</label>
+        <div class="input-wrap">
+          <input type="number" id="card-vencimento" min="1" max="31" placeholder="Ex: 10" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="card-limite">Limite total (R$)</label>
+        <div class="input-wrap">
+          <input type="number" id="card-limite" step="0.01" min="100" placeholder="0,00" required />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" id="cancel-card-modal">Cancelar</button>
+        <button type="submit" class="btn-primary" id="card-submit">Salvar cartão</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: nova compra -->
+<div class="modal-overlay" id="compra-modal-overlay">
+  <div class="modal-box">
+    <div class="form-header">
+      <h2>Nova compra</h2>
+      <p>A compra entra automaticamente na fatura do mês.</p>
+    </div>
+    <form id="compra-form" class="auth-form" novalidate>
+      <div class="field">
+        <label for="compra-cartao">Cartão</label>
+        <select id="compra-cartao" class="select-input"></select>
+      </div>
+      <div class="field">
+        <label for="compra-desc">Descrição</label>
+        <div class="input-wrap">
+          <input type="text" id="compra-desc" placeholder="Ex: Notebook" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="compra-valor">Valor total (R$)</label>
+        <div class="input-wrap">
+          <input type="number" id="compra-valor" step="0.01" min="0.01" placeholder="0,00" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="compra-parcelas">Parcelas</label>
+        <div class="input-wrap">
+          <input type="number" id="compra-parcelas" min="1" max="36" value="1" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="compra-data">Data da compra</label>
+        <div class="input-wrap">
+          <input type="date" id="compra-data" required />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" id="cancel-compra-modal">Cancelar</button>
+        <button type="submit" class="btn-primary" id="compra-submit">Salvar compra</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: pagar fatura -->
+<div class="modal-overlay" id="pay-modal-overlay">
+  <div class="modal-box">
+    <div class="form-header">
+      <h2>Pagar fatura</h2>
+      <p id="pay-info"></p>
+    </div>
+    <form id="pay-form" class="auth-form" novalidate>
+      <div class="field">
+        <label for="pay-valor">Valor do pagamento (R$)</label>
+        <div class="input-wrap">
+          <input type="number" id="pay-valor" step="0.01" min="0.01" placeholder="0,00" required />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" id="cancel-pay-modal">Cancelar</button>
+        <button type="submit" class="btn-primary" id="pay-submit">Registrar pagamento</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: confirmar exclusão -->
+<div class="modal-overlay" id="confirm-delete-overlay">
+  <div class="modal-box confirm-box">
+    <div class="confirm-icon">🗑</div>
+    <h2 id="confirm-delete-title">Excluir item?</h2>
+    <p id="confirm-delete-text"></p>
+    <div class="modal-actions" style="margin-top:18px;">
+      <button type="button" class="btn-ghost" id="cancel-delete">Cancelar</button>
+      <button type="button" class="btn-danger" id="confirm-delete">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<!-- Mensagens rápidas -->
+<div class="snackbar" id="snackbar">
+  <span id="snackbar-text"></span>
+  <button class="snackbar-undo" id="snackbar-undo" type="button" style="display:none;">Desfazer</button>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/perfil-sync.js"></script>
+<script src="js/cartoes.js"></script>
+</body>
+</html>
