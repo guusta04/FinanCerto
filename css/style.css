@@ -1,0 +1,526 @@
+/* =========================================================
+   FinanCerto — Design Tokens
+   Estilo: moderno / minimalista, tons neutros + verde-esmeralda
+   ========================================================= */
+
+:root {
+  /* Cor */
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --ink: #1C1F1E;
+  --ink-soft: #5B6360;
+  --ink-faint: #8A9390;
+  --border: #E3E1DB;
+  --border-strong: #CFCDC5;
+
+  --accent: #146B4B;
+  --accent-dark: #0E4F38;
+  --accent-soft: #E6F2EC;
+  --accent-soft-text: #0E4F38;
+
+  --error: #B3261E;
+  --error-soft: #FBEAE9;
+
+  --panel-bg: #10161A;
+  --panel-bg-2: #16211F;
+  --panel-ink: #F4F5F3;
+  --panel-ink-soft: #A9B4B0;
+  --panel-line: #2A3532;
+
+  /* Tipografia */
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(28, 31, 30, 0.06);
+  --shadow-md: 0 8px 24px rgba(16, 22, 26, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  outline: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  margin: 0;
+}
+
+a { color: var(--accent-dark); }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Layout geral: painel de marca + painel de formulário
+   ========================================================= */
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+}
+
+@media (max-width: 900px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Painel de marca (esquerda) ---------- */
+
+.brand-panel {
+  position: relative;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(20, 107, 75, 0.35), transparent 45%),
+    linear-gradient(180deg, var(--panel-bg) 0%, var(--panel-bg-2) 100%);
+  color: var(--panel-ink);
+  padding: clamp(28px, 4vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .brand-panel { display: none; }
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+.brand-mark .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(20, 107, 75, 0.25);
+}
+
+.brand-copy {
+  max-width: 420px;
+  margin-top: 40px;
+}
+
+.brand-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.brand-copy h1 {
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--panel-ink);
+}
+
+.brand-copy p {
+  margin-top: 14px;
+  color: var(--panel-ink-soft);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+/* ---------- Cartão de saldo (elemento assinatura) ---------- */
+
+.balance-card {
+  margin-top: 36px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  backdrop-filter: blur(6px);
+}
+
+.balance-card .label {
+  font-size: 0.78rem;
+  color: var(--panel-ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.balance-card .value {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-variant-numeric: tabular-nums;
+  margin-top: 6px;
+  color: var(--panel-ink);
+}
+
+.balance-card .trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #7FE3B4;
+  background: rgba(127, 227, 180, 0.1);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.balance-chart {
+  width: 100%;
+  height: auto;
+  margin-top: 18px;
+  display: block;
+}
+
+.balance-chart path.line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: draw-line 1.8s ease-out forwards 0.3s;
+}
+
+.balance-chart path.fill {
+  fill: url(#chartFill);
+  opacity: 0;
+  animation: fade-in 1s ease-out forwards 1.2s;
+}
+
+.balance-chart circle {
+  fill: var(--accent);
+  opacity: 0;
+  animation: fade-in 0.6s ease-out forwards 2s;
+}
+
+@keyframes draw-line {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .balance-chart path.line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .balance-chart path.fill,
+  .balance-chart circle {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.stat-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.stat-chip {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--panel-ink-soft);
+  border: 1px solid var(--panel-line);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+.stat-chip strong {
+  color: var(--panel-ink);
+  font-weight: 500;
+}
+
+.brand-footer {
+  font-size: 0.78rem;
+  color: var(--panel-ink-soft);
+  border-top: 1px solid var(--panel-line);
+  padding-top: 18px;
+  margin-top: 32px;
+}
+
+/* ---------- Painel de formulário (direita) ---------- */
+
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 5vw, 64px);
+}
+
+.form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-wrap .mobile-brand {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+
+.form-wrap .mobile-brand .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .form-wrap .mobile-brand { display: flex; }
+}
+
+.form-header h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.form-header p {
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.auth-form {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.field .hint {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-wrap input::placeholder {
+  color: var(--ink-faint);
+}
+
+.input-wrap input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.input-wrap input.invalid {
+  border-color: var(--error);
+}
+
+.input-wrap input.invalid:focus {
+  box-shadow: 0 0 0 3px var(--error-soft);
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.toggle-visibility:hover { color: var(--ink); }
+
+.field-error {
+  font-size: 0.78rem;
+  color: var(--error);
+  min-height: 1em;
+}
+
+/* Indicador de força de senha */
+.strength {
+  display: flex;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.strength .bar {
+  height: 4px;
+  flex: 1;
+  border-radius: 999px;
+  background: var(--border);
+  transition: background 0.2s ease;
+}
+
+.strength-label {
+  font-size: 0.76rem;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.86rem;
+}
+
+.checkbox-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.checkbox-line input {
+  margin-top: 3px;
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.checkbox-line a { color: var(--accent-dark); font-weight: 600; }
+
+.link-quiet {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-quiet:hover { color: var(--accent-dark); }
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px 18px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-primary[disabled] {
+  background: var(--accent-dark);
+  cursor: not-allowed;
+}
+
+.form-toast {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.form-toast.show { display: flex; }
+
+.form-toast.success {
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+}
+
+.form-toast.error {
+  background: var(--error-soft);
+  color: var(--error);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+  margin: 4px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.form-footer {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.form-footer a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-footer a:hover { text-decoration: underline; }

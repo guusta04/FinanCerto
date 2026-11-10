@@ -1,0 +1,284 @@
+/* =========================================================
+   FinanCerto — Receitas & Despesas
+   Depende de css/style.css e css/dashboard.css
+   ========================================================= */
+
+html {
+  outline: hidden;
+}
+
+.page-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 720px) {
+  .page-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Barra de filtros ---------- */
+
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.segmented button {
+  background: var(--surface);
+  border: none;
+  padding: 9px 14px;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+}
+
+.segmented button:last-child {
+  border-right: none;
+}
+
+.segmented button.active {
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+}
+
+.filters-bar select.select-input {
+  width: auto;
+  min-width: 150px;
+  padding: 9px 12px;
+  font-size: 0.84rem;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.search-wrap input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px 9px 32px;
+}
+
+.search-wrap input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.search-wrap .search-ico {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.filters-clear {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filters-clear:hover {
+  color: var(--ink);
+}
+
+/* ---------- Badge de tipo ---------- */
+
+.tx-type-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.tx-type-badge.receita {
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+}
+
+.tx-type-badge.despesa {
+  background: var(--error-soft);
+  color: var(--error);
+}
+
+/* ---------- Ações da linha ---------- */
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
+.icon-btn.danger:hover {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.tx-table td.actions-cell {
+  text-align: right;
+}
+
+.results-count {
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+/* Ajuste: nesta página a tabela fica em um único painel de largura total */
+.full-table-panel .tx-table {
+  font-size: 0.9rem;
+}
+
+/* ---------- Linha sendo removida (transição) ---------- */
+
+.tx-table tr.tx-row-removing {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* ---------- Modal de confirmação (exclusão) ---------- */
+
+.confirm-box {
+  max-width: 360px;
+  text-align: left;
+}
+
+.confirm-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--error-soft);
+  color: var(--error);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.confirm-box h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.confirm-box p {
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.confirm-box p strong {
+  color: var(--ink);
+}
+
+.btn-danger {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: #fff;
+  background: var(--error);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px 18px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.btn-danger:hover {
+  background: #942019;
+}
+
+/* ---------- Snackbar (desfazer exclusão) ---------- */
+
+.snackbar {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 16px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--panel-bg);
+  color: var(--panel-ink);
+  border-radius: var(--radius-md);
+  padding: 12px 14px 12px 16px;
+  box-shadow: var(--shadow-md);
+  font-size: 0.86rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 60;
+}
+
+.snackbar.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.snackbar .snackbar-undo {
+  background: none;
+  border: none;
+  color: #7FE3B4;
+  font-weight: 600;
+  font-size: 0.86rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.snackbar .snackbar-undo:hover {
+  text-decoration: underline;
+}

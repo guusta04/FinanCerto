@@ -1,0 +1,311 @@
+/* =========================================================
+   FinanCerto — Componentes extras
+   Depende de css/style.css e css/dashboard.css
+   ========================================================= */
+
+   html {
+  outline: hidden;
+}
+
+.summary-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1080px) { .summary-grid.cols-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .summary-grid.cols-3 { grid-template-columns: 1fr; } }
+
+.section-block + .section-block { margin-top: 26px; }
+
+.section-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.section-block-header h2 { font-size: 1.05rem; font-weight: 600; }
+.section-block-header .sub { font-size: 0.82rem; color: var(--ink-faint); }
+
+/* ---------- Grade de cartões (metas / cartões de crédito) ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* ---------- Cartão visual de crédito ---------- */
+
+.credit-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  color: #fff;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, var(--cc-color-1, #146B4B), var(--cc-color-2, #0E4F38));
+  box-shadow: var(--shadow-md);
+}
+
+.credit-card .cc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.credit-card .cc-brand {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.credit-card .cc-actions { display: flex; gap: 6px; }
+
+.credit-card .cc-actions .icon-btn {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.credit-card .cc-actions .icon-btn:hover { background: rgba(255, 255, 255, 0.24); }
+
+.credit-card .cc-number {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  margin: 14px 0 4px;
+}
+
+.credit-card .cc-name { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; }
+
+.credit-card .cc-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  opacity: 0.85;
+  margin-top: 12px;
+}
+
+.credit-card .cc-limit-bar {
+  margin-top: 8px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+}
+
+.credit-card .cc-limit-bar span {
+  display: block;
+  height: 100%;
+  background: #fff;
+  border-radius: 999px;
+}
+
+/* ---------- Badge de status (fatura / alerta) ---------- */
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.status-badge.aberta { background: var(--accent-soft); color: var(--accent-soft-text); }
+.status-badge.paga { background: var(--bg); color: var(--ink-soft); border: 1px solid var(--border); }
+.status-badge.atrasada { background: var(--error-soft); color: var(--error); }
+
+/* ---------- Cartões de alerta ---------- */
+
+.alert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  background: var(--warning-soft);
+  color: var(--warning);
+  margin-bottom: 10px;
+}
+
+.alert-card .alert-ico { font-size: 1.05rem; flex-shrink: 0; }
+.alert-card .alert-body strong { color: inherit; }
+.alert-card .alert-body p { margin: 2px 0 0; font-size: 0.84rem; opacity: 0.92; }
+
+.alert-card.ok {
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+}
+
+.rule-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+
+.rule-row .rule-info { font-size: 0.88rem; }
+.rule-row .rule-info .rule-limit { color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.82rem; }
+.rule-row .rule-actions { display: flex; gap: 6px; }
+
+/* ---------- Linhas de relatório (mês a mês) ---------- */
+
+.report-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 1fr 100px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.86rem;
+}
+
+.report-row:last-child { border-bottom: none; }
+
+.report-row .report-month { font-weight: 600; }
+
+.report-bar-wrap { display: flex; flex-direction: column; gap: 3px; }
+
+.report-bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.report-bar-fill { display: block; height: 100%; border-radius: 999px; }
+.report-bar-fill.receita { background: var(--accent); }
+.report-bar-fill.despesa { background: var(--ink-faint); }
+
+.report-row .report-saldo {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Toggle switch ---------- */
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.switch-row:last-child { border-bottom: none; }
+
+.switch-row .switch-label strong { display: block; font-size: 0.92rem; }
+.switch-row .switch-label span { font-size: 0.8rem; color: var(--ink-faint); }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.switch .slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.switch .slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.15s ease;
+}
+
+.switch input:checked + .slider { background: var(--accent); }
+.switch input:checked + .slider::before { transform: translateX(18px); }
+
+/* ---------- Página de Perfil ---------- */
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .profile-layout { grid-template-columns: 1fr; }
+}
+
+.profile-card {
+  text-align: center;
+  padding: 28px 20px;
+}
+
+.profile-avatar-lg {
+  width: 84px;
+  height: 84px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.7rem;
+  margin: 0 auto 14px;
+}
+
+.profile-card h3 { font-size: 1.02rem; font-weight: 600; }
+.profile-card p { margin-top: 4px; font-size: 0.84rem; color: var(--ink-faint); word-break: break-word; }
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .profile-form-grid { grid-template-columns: 1fr; }
+}
+
+.profile-form-grid .field.full { grid-column: 1 / -1; }
+
+.profile-form-grid textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.profile-form-grid textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
